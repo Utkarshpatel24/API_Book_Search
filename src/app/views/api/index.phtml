@@ -1,0 +1,75 @@
+<?php
+// echo "<pre>";
+// print_r($books[0]->isbn[0]);
+?>
+<div class="container bg-secondary  text-center fs-1" style="padding:10px ;" >
+    <div class="search">
+        <div class="row">
+            <form action="" method="post" >
+                <input class="rounded-pill text-center" type="text" name="book" placeholder="search book here!!!!">
+                <button type="submit" class="btn btn-primary rounded-pill fs-2 ">Search</button>
+            </form>
+           
+           
+        </div>
+    </div>
+</div>
+
+
+<?php
+
+if (count($books) > 0) {
+    ?>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            
+            <th style="text-align: center;" class="fs-3">Books</th>
+            
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="3">Users quantity: <?php echo count($books)?> </td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php foreach ($books as $book) { ?>
+            <tr>
+                <td><div class="product-content product-wrap clearfix">
+		      <div class="row">
+				<div class="col-md-5 col-sm-12 col-xs-12">
+					<div class="product-image"> 
+						<img src="https://covers.openlibrary.org/b/olid/<?php echo $book->cover_edition_key;?>-M.jpg" alt="194x228" class="img-responsive" width="90px" height="90px"> 
+						 
+					</div>
+				</div>
+				<div class="col-md-7 col-sm-12 col-xs-12">
+				<div class="product-deatil">
+						<h5 class="name">
+							<a href="/api/bookDisplay/<?php echo $book->cover_edition_key;?>/<?php echo $books[0]->isbn[0]; ?>">
+								<?php echo $book->title ?> 
+							</a>
+						</h5>
+						
+				</div>
+				<div class="description">
+					<p>by <?php
+                        $authors = $book->author_name;
+                        // print_r($authors);
+                        foreach($authors as $author)
+                        echo $author."<br>";   
+                    ?></p>
+				</div>
+			
+			</div>
+		</div>
+	</div></td>
+                
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <?php
+}
+
